@@ -14,7 +14,8 @@ void DisplayUI()
 	printf("The number description:\n");
 	printf("0-Exit the program\n");
 	printf("1-Test to config the configuration files\n");
-	printf("2-Test to read the configuration files");
+	printf("2-Test to read the configuration files\n");
+	printf("Please enter the CodeNum:");
 }
 
 int CreatConfigFiles()
@@ -33,6 +34,7 @@ int CreatConfigFiles()
 		exit(1);
 	}
 	printf("%s = %s\n", ItemName, ItemValue);
+	printf("Please enter the CodeNum:");
 	return ret;
 }
 int ReadConfigFiles()
@@ -43,13 +45,14 @@ int ReadConfigFiles()
 
 	printf("\nPlease input the Name:");
 	scanf("%s", ItemName);
-	ret = GetConfigItem(FileName,ItemName,ItemValue,strlen(ItemValue) );
+	ret = GetConfigItem(FileName,ItemName,ItemValue,strlen(ItemValue));
 	if (ret != 0)
 	{
 		printf("The function \"WriteConfigItem\" error\n");
 		exit(1);
 	}
 	printf("%s = %s\n", ItemName, ItemValue);
+	printf("Please enter the CodeNum:");
 	return ret;
 }
 int main()
@@ -57,13 +60,18 @@ int main()
 	int CodeNum = 0;
 	DisplayUI();
 	scanf("%d", &CodeNum);
-	while (1)
+	for( ; ;)
 	{
 		switch (CodeNum)
 		{
-			case 0:
-			case 1:
-			case 2:
+		case 1: {
+			CreatConfigFiles(); 
+			CodeNum = 0;
+			} break;
+		case 2: {
+			ReadConfigFiles(); 
+		    } break;
+			case 0:exit(0);
 		}
 	}
 	system("pause");
