@@ -5,7 +5,7 @@
 #include "Configs.h"
 
 /*Get the Configuration options*/
-int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
+int GetConfigItem(char *pFileName, char *pKey)
 {
 	char *KeyValue=NULL;
 	int ret = 0;
@@ -18,7 +18,8 @@ int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
 		exit(-1);
 	}
 	KeyValue = fgets(KeyValue, strlen(KeyValue), fp);
-	
+	char *p = strstr(KeyValue, pKey);
+	pKey = p;
 	return ret;
 }
 

@@ -45,7 +45,7 @@ int ReadConfigFiles()
 
 	printf("\nPlease input the Name:");
 	scanf("%s", ItemName);
-	ret = GetConfigItem(FileName,ItemName,ItemValue,strlen(ItemValue));
+	ret = GetConfigItem(FileName,ItemName);
 	if (ret != 0)
 	{
 		printf("The function \"WriteConfigItem\" error\n");
