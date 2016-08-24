@@ -15,7 +15,6 @@ void DisplayUI()
 	printf("0-Exit the program\n");
 	printf("1-Test to config the configuration files\n");
 	printf("2-Test to read the configuration files\n");
-	printf("Please enter the CodeNum:");
 }
 
 int CreatConfigFiles()
@@ -34,7 +33,8 @@ int CreatConfigFiles()
 		exit(1);
 	}
 	printf("%s = %s\n", ItemName, ItemValue);
-	printf("Please enter the CodeNum:");
+	printf("Config the file successfully!\n");
+	printf("---------------------------\n");
 	return ret;
 }
 int ReadConfigFiles()
@@ -52,26 +52,33 @@ int ReadConfigFiles()
 		exit(1);
 	}
 	printf("%s = %s\n", ItemName, ItemValue);
-	printf("Please enter the CodeNum:");
+	printf("Read the configuration file successfully!\n");
+	printf("---------------------------\n");
 	return ret;
 }
 int main()
 {
 	int CodeNum = 0;
 	DisplayUI();
-	scanf("%d", &CodeNum);
 	for( ; ;)
 	{
+		printf("Please enter the CodeNum:");
+		scanf("%d", &CodeNum);
 		switch (CodeNum)
 		{
-		case 1: {
+		case 1: 
+		{
 			CreatConfigFiles(); 
-			CodeNum = 0;
-			} break;
-		case 2: {
+		} break;
+		case 2: 
+		{
 			ReadConfigFiles(); 
-		    } break;
-			case 0:exit(0);
+		} break;
+		case 0:
+		{
+			exit(0);
+		} break;
+		default : exit(0);
 		}
 	}
 	system("pause");
