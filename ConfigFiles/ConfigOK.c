@@ -7,9 +7,15 @@
 /*Get the Configuration options*/
 int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
 {
-	char *KeyValue=NULL;
+	char KeyValue[1024];
 	int ret = 0;
 	FILE *fp = NULL;
+	if (pFileName == NULL || pKey == NULL || pValue == NULL)
+	{
+		printf("Error input!\n");
+		ret = -1;
+		exit(-1);
+	}
 	fp = fopen(pFileName, "a+");
 	if (fp == NULL)
 	{
@@ -17,7 +23,11 @@ int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
 		ret = -1;
 		exit(-1);
 	}
-	KeyValue = fgets(KeyValue, strlen(KeyValue), fp);
+	while (!feof(fp))
+	{
+		fgets(KeyValue, strlen(KeyValue), fp);
+		printf("%s\n", KeyValue);
+	}
 	
 	return ret;
 }
