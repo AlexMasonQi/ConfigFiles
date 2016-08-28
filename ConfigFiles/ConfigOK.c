@@ -5,7 +5,7 @@
 #include "Configs.h"
 
 /*Get the Configuration options*/
-int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
+int GetConfigItem(char *pFileName, char *pKey)
 {
 	char KeyValue[1024];
 	int ret = 0;
@@ -23,11 +23,7 @@ int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen)
 		ret = -1;
 		exit(-1);
 	}
-	while (!feof(fp))
-	{
-		fgets(KeyValue, strlen(KeyValue), fp);
-		printf("%s\n", KeyValue);
-	}
+	KeyValue = fgets(KeyValue, strlen(KeyValue), fp);
 	
 	return ret;
 }

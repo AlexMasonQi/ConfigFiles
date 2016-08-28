@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 	/*Get the Configuration options*/
-	int GetConfigItem(char *pFileName, char *pKey, char *pValue, int pValuelen);
+	int GetConfigItem(char *pFileName, char *pKey);
 	/*Write the Configuration options*/
 	int WriteConfigItem(char *pFileName,char *pItemName, char *pValue, int ItemValuelen);
 
