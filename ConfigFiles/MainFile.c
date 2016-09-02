@@ -15,6 +15,7 @@ void DisplayUI()
 	printf("0-Exit the program\n");
 	printf("1-Test to config the configuration files\n");
 	printf("2-Test to read the configuration files\n");
+	printf("                                      \n");
 }
 
 int CreatConfigFiles()
@@ -32,9 +33,8 @@ int CreatConfigFiles()
 		printf("The function \"WriteConfigItem\" error\n");
 		exit(1);
 	}
-	printf("%s = %s\n", ItemName, ItemValue);
 	printf("Config the file successfully!\n");
-	printf("---------------------------\n");
+	printf("-----------------------------\n");
 	return ret;
 }
 int ReadConfigFiles()
@@ -51,7 +51,6 @@ int ReadConfigFiles()
 		printf("The function \"WriteConfigItem\" error\n");
 		exit(1);
 	}
-	printf("%s = %s\n", ItemName, ItemValue);
 	printf("Read the configuration file successfully!\n");
 	printf("---------------------------\n");
 	return ret;
