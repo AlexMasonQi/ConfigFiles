@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "Configs.h"
+int Tag = 0;
 
 /*Delete the space in the string*/
 int TrimSpace(char *instr, char *outstr)
@@ -90,36 +91,79 @@ int GetConfigItem(char *pFileName, char *pKey)
 }
 
 /*Write the Configuration options*/
-int WriteConfigItem(char *pFileName,char *pItemName, char *pValue, int ItemValuelen)
+int WriteConfigItem(char *pFileName,char *pItemName, char *pValue)
 {
+	FILE *fp = NULL;
 	int ret = 0;
-	FILE *fp;
-	fp = fopen(pFileName, "a+");
-	//char buffer[1024];
-	if (fp == NULL)
+	char *Linebuf[1024];
+	char *Filebuf[1024] = { 0 };
+	char *temp = NULL;
+	if (pFileName == NULL || pItemName == NULL || pValue == NULL)
 	{
-		printf("Error to open or creat the file!\n");
 		ret = -1;
+		printf("Error input!\n");
 		exit(-1);
 	}
-	strcat(pItemName, " = ");
-	strcat(pItemName, pValue);
-	/*pItemName[strlen(pItemName)] = "\n";
-	pItemName[strlen(pItemName) + 1] = '\0';*/
-	/*while (!feof(fp))
+	fp = fopen(pFileName, "r+");
+	if (fp == NULL)
 	{
-		fgets(buffer, strlen(buffer), fp);
-		if (buffer != NULL)
+		ret = -2;
+		printf("The file \"TestConfigFile1.ini\" does not exist!\n");
+		//goto END;
+	}
+	if (fp == NULL)
+	{
+		fp = fopen(pFileName, "wt+");
+		if (fp == NULL)
 		{
-			strcat(buffer, "\n");
+			ret = -3;
+			printf("The file \"TestConfigFile1.ini\" does not exist!\n");
+		}
+	}
+	while (!feof(fp))
+	{
+		memset(Linebuf, 0, sizeof(Linebuf));
+		temp = fgets(Linebuf, strlen(Linebuf), fp);
+		if (temp == NULL)
+		{
 			break;
 		}
-	}	*/
-	int Valuelen = fputs(pItemName, fp);
-	ItemValuelen = Valuelen;
+		temp = strstr(Linebuf, pItemName);
+		if (temp == NULL)
+		{
+			strcat(Filebuf, Linebuf);
+			continue;
+		}
+		else
+		{
+			sprintf(Linebuf, "%s=%s\n", pItemName, pValue);
+			strcat(Filebuf, Linebuf);
+			Tag = 1;
+		}
+	}
+	if (Tag == 0)
+	{
+		fprintf(fp, "%s=%s\n", pItemName, pValue);
+	}
+	else
+	{
+		if (fp != NULL)
+		{
+			fclose(fp);
+			fp = NULL;
+		}
+		fp = fopen(pFileName, "wt+");
+		if (fp == NULL)
+		{
+			ret = -4;
+			printf("The file \"TestConfigFile1.ini\" does not exist!\n");
+			goto END;
+		}
+		fputs(Filebuf, fp);
+	}
+END:
 	if (fp != NULL)
 	{
 		fclose(fp);
 	}
-	return ret;
 }

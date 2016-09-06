@@ -8,7 +8,7 @@ extern "C" {
 	/*Get the Configuration options*/
 	int GetConfigItem(char *pFileName, char *pKey);
 	/*Write the Configuration options*/
-	int WriteConfigItem(char *pFileName,char *pItemName, char *pValue, int ItemValuelen);
+	int WriteConfigItem(char *pFileName,char *pItemName, char *pValue);
 
 
 #ifdef _cplusplus

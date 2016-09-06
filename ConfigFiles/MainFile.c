@@ -27,7 +27,7 @@ int CreatConfigFiles()
 	scanf("%s", ItemName);
 	printf("\nPlease input the KeyValue:");
 	scanf("%s", ItemValue);
-	ret = WriteConfigItem(FileName, ItemName, ItemValue,strlen(ItemValue));
+	ret = WriteConfigItem(FileName, ItemName, ItemValue);
 	if (ret != 0)
 	{
 		printf("The function \"WriteConfigItem\" error\n");
